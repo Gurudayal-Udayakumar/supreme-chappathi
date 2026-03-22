@@ -1,0 +1,198 @@
+.bus-page .page-hero {
+  background: var(--bg-secondary);
+  padding: calc(var(--navbar-height) + var(--space-3xl)) 0 var(--space-3xl);
+  text-align: center;
+}
+
+/* How It Works */
+.how-it-works {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+  position: relative;
+  margin-bottom: var(--space-3xl);
+}
+
+.how-it-works::before {
+  content: '';
+  position: absolute;
+  top: 50px;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background: var(--gradient-brand);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.how-step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.how-step-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto var(--space-md);
+  color: #fff;
+  box-shadow: var(--shadow-glow-saffron);
+  transition: all var(--transition-base);
+}
+
+.how-step:hover .how-step-icon {
+  transform: scale(1.1) translateY(-5px);
+}
+
+.how-step-number {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(20px);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--crimson);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.how-step h4 { margin-bottom: var(--space-xs); font-size: 1.05rem; }
+.how-step p { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Routes Section */
+.routes-section { background: var(--bg-secondary); }
+
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.route-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  transition: all var(--transition-base);
+}
+
+.route-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--saffron);
+}
+
+.route-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-md);
+  background: var(--badge-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.route-info h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+.route-info p { font-size: 0.85rem; color: var(--text-muted); }
+.route-info .timing { color: var(--saffron); font-weight: 600; font-size: 0.8rem; margin-top: 0.25rem; }
+
+/* Benefits */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.benefit-card {
+  text-align: center;
+  padding: var(--space-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.benefit-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+.benefit-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.benefit-card h4 { margin-bottom: var(--space-xs); }
+.benefit-card p { font-size: 0.85rem; color: var(--text-muted); }
+
+/* FAQ */
+.faq-section { background: var(--bg-secondary); }
+
+.faq-list {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  padding: var(--space-lg);
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color var(--transition-fast);
+}
+
+.faq-question:hover { color: var(--saffron); }
+
+.faq-question .arrow {
+  transition: transform var(--transition-base);
+  font-size: 0.85rem;
+  color: var(--saffron);
+}
+
+.faq-question .arrow.open {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 var(--space-lg) var(--space-lg);
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  animation: fadeIn 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .how-it-works { grid-template-columns: repeat(2, 1fr); }
+  .how-it-works::before { display: none; }
+  .routes-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+}

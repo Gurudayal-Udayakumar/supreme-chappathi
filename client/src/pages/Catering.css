@@ -1,0 +1,113 @@
+.catering-page .page-hero {
+  background: var(--bg-secondary);
+  padding: calc(var(--navbar-height) + var(--space-3xl)) 0 var(--space-3xl);
+  text-align: center;
+}
+
+.catering-packages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+}
+
+.package-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.package-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--saffron);
+}
+
+.package-card.featured {
+  border-color: var(--saffron);
+}
+
+.package-card.featured::before {
+  content: 'Most Popular';
+  position: absolute;
+  top: 16px;
+  right: -30px;
+  background: var(--gradient-brand);
+  color: #fff;
+  padding: 0.3rem 2.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+.package-header {
+  padding: var(--space-xl) var(--space-xl) var(--space-md);
+  text-align: center;
+}
+
+.package-header .package-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+.package-header h3 { margin-bottom: var(--space-xs); }
+
+.package-header .package-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.package-features {
+  padding: 0 var(--space-xl) var(--space-xl);
+}
+
+.package-features ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.package-features ul li .check {
+  color: var(--saffron);
+  font-size: 0.9rem;
+}
+
+.package-footer {
+  padding: var(--space-md) var(--space-xl) var(--space-xl);
+  text-align: center;
+}
+
+/* Enquiry Form */
+.enquiry-section {
+  background: var(--bg-secondary);
+}
+
+.enquiry-form-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.form-success {
+  text-align: center;
+  padding: var(--space-2xl);
+}
+
+.form-success .success-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-md);
+}
+
+@media (max-width: 900px) {
+  .catering-packages { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+}

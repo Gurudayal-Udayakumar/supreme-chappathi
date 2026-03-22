@@ -1,0 +1,35 @@
+.about-page .page-hero {
+  background: var(--bg-secondary);
+  padding: calc(var(--navbar-height) + var(--space-3xl)) 0 var(--space-3xl);
+  text-align: center;
+}
+
+.story-section { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: center; }
+.story-image { height: 400px; background: var(--gradient-dark-surface); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 5rem; }
+.story-text h2 { margin-bottom: var(--space-lg); }
+.story-text p { margin-bottom: var(--space-md); font-size: 1rem; line-height: 1.8; }
+
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
+.value-card { text-align: center; padding: var(--space-xl); background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); transition: all var(--transition-base); }
+.value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--saffron); }
+.value-card .value-icon { font-size: 2.5rem; margin-bottom: var(--space-md); }
+.value-card h4 { margin-bottom: var(--space-xs); }
+.value-card p { font-size: 0.85rem; color: var(--text-muted); }
+
+.founder-section { display: grid; grid-template-columns: 300px 1fr; gap: var(--space-2xl); align-items: center; }
+.founder-image { width: 250px; height: 250px; border-radius: var(--radius-full); background: var(--gradient-brand); display: flex; align-items: center; justify-content: center; font-size: 5rem; margin: 0 auto; }
+.founder-info h3 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+.founder-info .title { color: var(--saffron); font-weight: 600; margin-bottom: var(--space-md); }
+.founder-info p { font-size: 1rem; line-height: 1.8; }
+
+.timeline { max-width: 600px; margin: 0 auto; }
+.timeline-item { display: flex; gap: var(--space-lg); margin-bottom: var(--space-xl); }
+.timeline-year { font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: var(--saffron); min-width: 80px; }
+.timeline-content h4 { margin-bottom: 0.25rem; }
+.timeline-content p { font-size: 0.9rem; color: var(--text-muted); }
+
+@media (max-width: 900px) {
+  .story-section, .founder-section { grid-template-columns: 1fr; text-align: center; }
+  .values-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .story-text p { max-width: unset; }
+}
