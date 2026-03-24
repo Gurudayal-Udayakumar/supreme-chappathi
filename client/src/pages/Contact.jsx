@@ -104,7 +104,7 @@ export default function Contact() {
                 <div className="contact-card-icon"><FiMapPin /></div>
                 <div className="contact-card-info">
                   <h4>Visit Us</h4>
-                  <p>Supreme Chappathi, Industrial Area,<br />Tirupur, Tamil Nadu 641602</p>
+                  <p>Supreme Chappathi,<br />Tirupur, Tamil Nadu</p>
                 </div>
               </div>
               <div className="contact-card">
@@ -192,7 +192,7 @@ export default function Contact() {
           {/* Map */}
           <div className="map-section" data-aos="fade-up">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125323.40517416685!2d77.28410879999999!3d11.1085242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba907b0754fed9f%3A0x68370824feae4286!2sTiruppur%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3914.7817556745927!2d77.34792147586391!3d11.129625452577871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba907a9e408a4d3%3A0xf9c4e573553ce056!2sSUPREME%20CHAPPATHI!5e0!3m2!1sen!2sin!4v1774380461918!5m2!1sen!2sin"
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
