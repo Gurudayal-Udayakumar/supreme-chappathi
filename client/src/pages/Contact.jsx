@@ -6,6 +6,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import './Contact.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
@@ -38,13 +39,32 @@ export default function Contact() {
 
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/contact`, {
+      // Save to MongoDB (backend) and send email (Web3Forms) in parallel
+      const backendPromise = fetch(`${API_URL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      const data = await res.json();
-      if (!res.ok) {
+
+      const emailPromise = WEB3FORMS_KEY
+        ? fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: WEB3FORMS_KEY,
+              subject: `📩 New Contact: ${formData.subject}`,
+              from_name: 'Supreme Chappathi Website',
+              name: formData.name,
+              email: formData.email,
+              phone: formData.phone,
+              message: formData.message
+            })
+          })
+        : Promise.resolve(null);
+
+      const [backendRes] = await Promise.all([backendPromise, emailPromise]);
+      const data = await backendRes.json();
+      if (!backendRes.ok) {
         setError(data.errors ? data.errors.join(', ') : data.message || 'Something went wrong');
         setLoading(false);
         return;
