@@ -5,6 +5,7 @@ import { FiCheck, FiSend } from 'react-icons/fi';
 import './Catering.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
 
 const packages = [
   {
@@ -37,27 +38,57 @@ export default function Catering() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => { AOS.init({ duration: 800, once: true }); }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/catering`, {
+      // Save to MongoDB and send email in parallel
+      const backendPromise = fetch(`${API_URL}/catering`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      if (res.ok) setSubmitted(true);
+
+      const emailPromise = WEB3FORMS_KEY
+        ? fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: WEB3FORMS_KEY,
+              subject: `🍽️ Catering Enquiry: ${formData.eventType} - ${formData.name}`,
+              from_name: 'Supreme Chappathi Website',
+              name: formData.name,
+              email: formData.email || 'Not provided',
+              phone: formData.phone,
+              'Event Type': formData.eventType,
+              'Event Date': formData.eventDate,
+              'Guest Count': formData.guestCount,
+              message: formData.message || 'No additional details'
+            })
+          })
+        : Promise.resolve(null);
+
+      const [backendRes] = await Promise.all([backendPromise, emailPromise]);
+      if (backendRes.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await backendRes.json();
+        setError(data.message || 'Something went wrong');
+      }
     } catch {
-      setSubmitted(true); // Show success even if API is down for demo
+      setError('Could not reach the server. Please try again later.');
     }
     setLoading(false);
   };
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    if (error) setError('');
   };
 
   return (
@@ -164,6 +195,7 @@ export default function Catering() {
                   <textarea className="form-control" name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about your menu preferences, special requirements, etc." />
                 </div>
 
+                {error && <div className="form-error">{error}</div>}
                 <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }} disabled={loading}>
                   {loading ? 'Submitting...' : <><FiSend /> Submit Enquiry</>}
                 </button>
