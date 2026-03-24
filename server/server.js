@@ -1,10 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Rate limiting — general API
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // 100 requests per 15 min per IP
+  message: { message: 'Too many requests. Please try again later.' }
+});
+
+// Rate limiting — strict for form submissions
+const formLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // 5 form submissions per 15 min per IP
+  message: { message: 'Too many submissions. Please wait before trying again.' }
+});
 
 // Middleware
 const allowedOrigins = [
@@ -15,14 +30,14 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, etc.)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
-    callback(null, true); // Allow all for now — tighten in production if needed
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true
 }));
 app.use(express.json());
+app.use('/api', apiLimiter);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/supreme-chappathi')
@@ -32,8 +47,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/supreme-c
 // Routes
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
-app.use('/api/catering', require('./routes/cateringRoutes'));
-app.use('/api/contact', require('./routes/contactRoutes'));
+app.use('/api/catering', formLimiter, require('./routes/cateringRoutes'));
+app.use('/api/contact', formLimiter, require('./routes/contactRoutes'));
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FiCheck, FiSend } from 'react-icons/fi';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import './Catering.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -39,19 +40,29 @@ export default function Catering() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const captchaRef = useRef(null);
+
+  const HCAPTCHA_SITE_KEY = import.meta.env.VITE_HCAPTCHA_SITE_KEY || '10000000-ffff-ffff-ffff-000000000001';
 
   useEffect(() => { AOS.init({ duration: 800, once: true }); }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    if (!captchaToken) {
+      setError('Please complete the CAPTCHA verification');
+      return;
+    }
+
     setLoading(true);
     try {
       // Save to MongoDB and send email in parallel
       const backendPromise = fetch(`${API_URL}/catering`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, captchaToken })
       });
 
       const emailPromise = WEB3FORMS_KEY
@@ -84,6 +95,8 @@ export default function Catering() {
       setError('Could not reach the server. Please try again later.');
     }
     setLoading(false);
+    if (captchaRef.current) captchaRef.current.resetCaptcha();
+    setCaptchaToken(null);
   };
 
   const handleChange = (e) => {
@@ -196,7 +209,15 @@ export default function Catering() {
                 </div>
 
                 {error && <div className="form-error">{error}</div>}
-                <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }} disabled={loading}>
+                <div className="captcha-wrapper">
+                  <HCaptcha
+                    sitekey={HCAPTCHA_SITE_KEY}
+                    onVerify={(token) => setCaptchaToken(token)}
+                    onExpire={() => setCaptchaToken(null)}
+                    ref={captchaRef}
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }} disabled={loading || !captchaToken}>
                   {loading ? 'Submitting...' : <><FiSend /> Submit Enquiry</>}
                 </button>
               </form>

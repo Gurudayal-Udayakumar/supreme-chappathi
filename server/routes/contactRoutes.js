@@ -3,6 +3,7 @@ const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const Contact = require('../models/Contact');
 const { sendContactEmail } = require('../utils/emailService');
+const { verifyCaptcha } = require('../utils/captcha');
 
 // Input validation & sanitization rules
 const contactValidation = [
@@ -44,6 +45,12 @@ router.post('/', contactValidation, async (req, res) => {
         message: 'Validation failed',
         errors: errors.array().map(e => e.msg)
       });
+    }
+
+    // Verify hCaptcha
+    const captchaResult = await verifyCaptcha(req.body.captchaToken);
+    if (!captchaResult.success) {
+      return res.status(400).json({ message: captchaResult.message });
     }
 
     const { name, email, phone, subject, message } = req.body;

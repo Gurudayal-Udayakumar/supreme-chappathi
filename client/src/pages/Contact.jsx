@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FiMapPin, FiPhone, FiMail, FiClock, FiSend } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import './Contact.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -14,6 +15,10 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [phoneError, setPhoneError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const captchaRef = useRef(null);
+
+  const HCAPTCHA_SITE_KEY = import.meta.env.VITE_HCAPTCHA_SITE_KEY || '10000000-ffff-ffff-ffff-000000000001';
 
   useEffect(() => { AOS.init({ duration: 800, once: true }); }, []);
 
@@ -37,13 +42,19 @@ export default function Contact() {
       return;
     }
 
+    // Validate captcha
+    if (!captchaToken) {
+      setError('Please complete the CAPTCHA verification');
+      return;
+    }
+
     setLoading(true);
     try {
       // Save to MongoDB (backend) and send email (Web3Forms) in parallel
       const backendPromise = fetch(`${API_URL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, captchaToken })
       });
 
       const emailPromise = WEB3FORMS_KEY
@@ -74,6 +85,8 @@ export default function Contact() {
       setError('Could not reach the server. Please try again later.');
     }
     setLoading(false);
+    if (captchaRef.current) captchaRef.current.resetCaptcha();
+    setCaptchaToken(null);
   };
 
   const handleChange = e => {
@@ -181,7 +194,15 @@ export default function Contact() {
                     <textarea className="form-control" name="message" value={formData.message} onChange={handleChange} placeholder="Tell us more..." required />
                   </div>
                   {error && <div className="form-error">{error}</div>}
-                  <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }} disabled={loading || !!phoneError}>
+                  <div className="captcha-wrapper">
+                    <HCaptcha
+                      sitekey={HCAPTCHA_SITE_KEY}
+                      onVerify={(token) => setCaptchaToken(token)}
+                      onExpire={() => setCaptchaToken(null)}
+                      ref={captchaRef}
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }} disabled={loading || !!phoneError || !captchaToken}>
                     {loading ? 'Sending...' : <><FiSend /> Send Message</>}
                   </button>
                 </form>
