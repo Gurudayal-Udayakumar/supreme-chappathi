@@ -23,6 +23,7 @@ const categories = [
 ];
 
 // Fallback product data when API is not available
+// Fallback product data when API is not available
 const fallbackProducts = [
   {
     _id: '1', name: 'Classic Chappathi', slug: 'classic-chappathi', category: 'chappathi',
@@ -30,7 +31,7 @@ const fallbackProducts = [
     description: 'Our signature ready-to-cook chappathi made from premium whole wheat flour. Each piece is perfectly rolled, pressed by our automated machines, and packed fresh.',
     ingredients: ['Whole Wheat Flour', 'Water', 'Salt', 'Sunflower Oil'],
     nutrition: { calories: '120 kcal/pc', protein: '3.5g', carbs: '22g', fat: '2.5g', fiber: '3g' },
-    packSizes: [{ size: '10 pieces', price: 50 }, { size: '20 pieces', price: 90 }, { size: '50 pieces', price: 200 }, { size: '100 pieces', price: 380 }],
+    packSizes: [{ size: '12 pieces (475g)', price: 60 }],
     cookingInstructions: ['Heat a tawa on medium flame', 'Place chappathi on hot tawa', 'Cook 30 sec each side', 'Apply ghee if desired', 'Serve hot'],
     shelfLife: '5 days refrigerated, 30 days frozen', isAvailable: true, isFeatured: true
   },
@@ -40,7 +41,7 @@ const fallbackProducts = [
     description: 'Pre-rolled, perfectly circular pooris ready for frying. Made with fine wheat flour and a touch of semolina for that perfect puff.',
     ingredients: ['Wheat Flour', 'Semolina', 'Water', 'Salt', 'Cooking Oil'],
     nutrition: { calories: '95 kcal/pc', protein: '2.5g', carbs: '15g', fat: '3g', fiber: '1.5g' },
-    packSizes: [{ size: '10 pieces', price: 45 }, { size: '20 pieces', price: 80 }, { size: '50 pieces', price: 180 }, { size: '100 pieces', price: 340 }],
+    packSizes: [{ size: '10 pieces (450g)', price: 60 }],
     cookingInstructions: ['Heat oil in a deep pan', 'Slide poori into hot oil', 'Press lightly to puff', 'Flip once golden', 'Drain and serve hot'],
     shelfLife: '3 days refrigerated, 20 days frozen', isAvailable: true, isFeatured: true
   },
@@ -50,7 +51,7 @@ const fallbackProducts = [
     description: 'Multi-layered, flaky parotta made with our signature folding technique. Crispy outside, soft inside — a South Indian favourite!',
     ingredients: ['Maida', 'Water', 'Salt', 'Sunflower Oil', 'Sugar'],
     nutrition: { calories: '180 kcal/pc', protein: '4g', carbs: '28g', fat: '6g', fiber: '1g' },
-    packSizes: [{ size: '5 pieces', price: 55 }, { size: '10 pieces', price: 100 }, { size: '25 pieces', price: 230 }, { size: '50 pieces', price: 440 }],
+    packSizes: [{ size: '6 pieces (480g)', price: 60 }],
     cookingInstructions: ['Heat tawa on medium-high', 'Place parotta on tawa', 'Add oil/ghee around edges', 'Cook 1-2 min each side', 'Clap to separate layers'],
     shelfLife: '4 days refrigerated, 30 days frozen', isAvailable: true, isFeatured: true
   },
@@ -60,7 +61,7 @@ const fallbackProducts = [
     description: 'Special chola-flavoured pooris infused with aromatic spices and turmeric. A festival favourite bringing festive flavours to everyday meals!',
     ingredients: ['Wheat Flour', 'Chola Dal Powder', 'Turmeric', 'Cumin', 'Black Pepper', 'Salt', 'Water'],
     nutrition: { calories: '110 kcal/pc', protein: '3.5g', carbs: '16g', fat: '3.5g', fiber: '2g' },
-    packSizes: [{ size: '10 pieces', price: 55 }, { size: '20 pieces', price: 100 }, { size: '50 pieces', price: 220 }, { size: '100 pieces', price: 420 }],
+    packSizes: [{ size: '10 pieces', price: 75 }],
     cookingInstructions: ['Heat oil in deep pan', 'Slide chola poori into oil', 'It will puff up naturally', 'Flip once golden', 'Serve with potato masala'],
     shelfLife: '3 days refrigerated, 20 days frozen', isAvailable: true, isFeatured: true
   }

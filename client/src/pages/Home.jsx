@@ -7,10 +7,38 @@ import { FaBus } from 'react-icons/fa';
 import './Home.css';
 
 const products = [
-  { name: 'Classic Chappathi', tagline: 'Soft & fluffy', price: '₹50', emoji: '🫓', slug: 'classic-chappathi' },
-  { name: 'Ready-to-Cook Poori', tagline: 'Puffs every time', price: '₹45', emoji: '🟡', slug: 'ready-to-cook-poori' },
-  { name: 'Flaky Parotta', tagline: 'Layers of deliciousness', price: '₹55', emoji: '🥐', slug: 'flaky-parotta' },
-  { name: 'Chola Poori', tagline: 'Festival favourite', price: '₹55', emoji: '✨', slug: 'chola-poori' },
+  {
+    name: 'Classic Chappathi',
+    tagline: 'Soft & fluffy',
+    price: '₹60 / 12 pcs',
+    emoji: '🫓',
+    slug: 'classic-chappathi',
+    image: '/chappathi-herobanner.jpg'
+  },
+  {
+    name: 'Ready-to-Cook Poori',
+    tagline: 'Puffs every time',
+    price: '₹60 / 10 pcs',
+    emoji: '🟡',
+    slug: 'ready-to-cook-poori',
+    image: '/poori-image.jpg'
+  },
+  {
+    name: 'Flaky Parotta',
+    tagline: 'Layers of deliciousness',
+    price: '₹60 / 6 pcs',
+    emoji: '🥐',
+    slug: 'flaky-parotta',
+    image: '/parotta-image.jpg'
+  },
+  {
+    name: 'Chola Poori',
+    tagline: 'Festival favourite',
+    price: '₹75 / 10 pcs',
+    emoji: '✨',
+    slug: 'chola-poori',
+    image: '/chola-poori-image.jpg'
+  },
 ];
 
 const testimonials = [
@@ -71,7 +99,13 @@ export default function Home() {
 
             <div className="hero-visual">
               <div className="hero-image-wrapper">
-                <div className="hero-image-placeholder">🫓</div>
+                <div className="hero-image-placeholder">
+                  <img
+                    src="/chappathi-herobanner.jpg"
+                    alt="Freshly cooked Supreme Chappathi"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
               <div className="hero-float-card card-1">
                 <div className="card-icon">🏭</div>

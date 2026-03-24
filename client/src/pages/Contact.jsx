@@ -11,24 +11,57 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
   useEffect(() => { AOS.init({ duration: 800, once: true }); }, []);
 
+  const phoneRegex = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,4}[-\s\.]?[0-9]{1,9}$/;
+
+  const validatePhone = (phone) => {
+    if (!phone.trim()) return 'Phone number is required';
+    if (phone.length < 7 || phone.length > 20) return 'Phone number must be between 7 and 20 digits';
+    if (!phoneRegex.test(phone)) return 'Please enter a valid phone number';
+    return '';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+
+    // Validate phone before submitting
+    const phoneValidation = validatePhone(formData.phone);
+    if (phoneValidation) {
+      setPhoneError(phoneValidation);
+      return;
+    }
+
     setLoading(true);
     try {
-      await fetch(`${API_URL}/contact`, {
+      const res = await fetch(`${API_URL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-    } catch { /* Demo mode */ }
-    setSubmitted(true);
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.errors ? data.errors.join(', ') : data.message || 'Something went wrong');
+        setLoading(false);
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError('Could not reach the server. Please try again later.');
+    }
     setLoading(false);
   };
 
-  const handleChange = e => setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === 'phone') setPhoneError(validatePhone(value));
+    if (error) setError('');
+  };
 
   return (
     <div className="contact-page page-enter">
@@ -106,8 +139,17 @@ export default function Contact() {
                   </div>
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Phone</label>
-                      <input className="form-control" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" />
+                      <label>Phone *</label>
+                      <input
+                        type="tel"
+                        className={`form-control${phoneError ? ' input-error' : ''}`}
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="+91 98765 43210"
+                        required
+                      />
+                      {phoneError && <span className="field-error">{phoneError}</span>}
                     </div>
                     <div className="form-group">
                       <label>Subject *</label>
@@ -118,7 +160,8 @@ export default function Contact() {
                     <label>Message *</label>
                     <textarea className="form-control" name="message" value={formData.message} onChange={handleChange} placeholder="Tell us more..." required />
                   </div>
-                  <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }} disabled={loading}>
+                  {error && <div className="form-error">{error}</div>}
+                  <button type="submit" className="btn btn-primary btn-lg" style={{ width: '100%' }} disabled={loading || !!phoneError}>
                     {loading ? 'Sending...' : <><FiSend /> Send Message</>}
                   </button>
                 </form>
