@@ -11,7 +11,6 @@ const products = [
     name: 'Classic Chappathi',
     tagline: 'Soft & fluffy',
     price: '₹60 / 12 pcs',
-    emoji: '🫓',
     slug: 'classic-chappathi',
     image: '/chappathi-herobanner.jpg'
   },
@@ -19,25 +18,22 @@ const products = [
     name: 'Ready-to-Cook Poori',
     tagline: 'Puffs every time',
     price: '₹60 / 10 pcs',
-    emoji: '🟡',
     slug: 'ready-to-cook-poori',
-    image: '/poori-image.jpg'
+    image: '/poori.png'
   },
   {
     name: 'Flaky Parotta',
     tagline: 'Layers of deliciousness',
     price: '₹60 / 6 pcs',
-    emoji: '🥐',
     slug: 'flaky-parotta',
-    image: '/parotta-image.jpg'
+    image: '/parotta.png'
   },
   {
     name: 'Chola Poori',
     tagline: 'Festival favourite',
     price: '₹75 / 10 pcs',
-    emoji: '✨',
     slug: 'chola-poori',
-    image: '/chola-poori-image.jpg'
+    image: '/chola-poori.png'
   },
 ];
 
@@ -139,7 +135,7 @@ export default function Home() {
             {products.map((product, index) => (
               <Link to="/products" key={product.slug} className="product-highlight-card" data-aos="fade-up" data-aos-delay={index * 100}>
                 <div className="product-card-image">
-                  {product.emoji}
+                  <img src={product.image} alt={product.name} />
                 </div>
                 <div className="product-card-body">
                   <h3>{product.name}</h3>

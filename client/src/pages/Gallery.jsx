@@ -6,18 +6,18 @@ import { FaBus } from 'react-icons/fa';
 import './Gallery.css';
 
 const galleryItems = [
-  { emoji: <FiDisc />, title: 'Classic Chappathi', category: 'products', desc: 'Soft, fresh chappathi stacks' },
-  { emoji: <FiSun />, title: 'Golden Poori', category: 'products', desc: 'Perfectly round pooris' },
-  { emoji: <FiLayers />, title: 'Flaky Parotta', category: 'products', desc: 'Layered parotta perfection' },
-  { emoji: <FiStar />, title: 'Chola Poori', category: 'products', desc: 'Spiced festival favourite' },
-  { emoji: <FiRefreshCw />, title: 'Dough Kneader', category: 'factory', desc: 'Industrial dough mixing' },
-  { emoji: <FiCircle />, title: 'Ball Cutter', category: 'factory', desc: 'Precision portioning' },
-  { emoji: <FiZap />, title: 'Pressing Machine', category: 'factory', desc: 'Uniform pressing' },
-  { emoji: <FiArrowRight />, title: 'Conveyor Belt', category: 'factory', desc: 'Automated transfer system' },
-  { emoji: <FiPackage />, title: 'Packaging Line', category: 'factory', desc: 'Hygienic sealed packaging' },
-  { emoji: <FiHeart />, title: 'Wedding Catering', category: 'catering', desc: 'Grand wedding feast' },
-  { emoji: <FiBriefcase />, title: 'Corporate Event', category: 'catering', desc: 'Office party catering' },
-  { emoji: <FiGift />, title: 'Festival Special', category: 'catering', desc: 'Festival celebrations' },
+  { media: '/chappathi-herobanner.jpg', title: 'Classic Chappathi', category: 'products', desc: 'Soft, fresh chappathi stacks', isImage: true },
+  { media: '/poori.png', title: 'Golden Poori', category: 'products', desc: 'Perfectly round pooris', isImage: true },
+  { media: '/parotta.png', title: 'Flaky Parotta', category: 'products', desc: 'Layered parotta perfection', isImage: true },
+  { media: '/chola-poori.png', title: 'Chola Poori', category: 'products', desc: 'Spiced festival favourite', isImage: true },
+  { media: <FiRefreshCw />, title: 'Dough Kneader', category: 'factory', desc: 'Industrial dough mixing' },
+  { media: <FiCircle />, title: 'Ball Cutter', category: 'factory', desc: 'Precision portioning' },
+  { media: <FiZap />, title: 'Pressing Machine', category: 'factory', desc: 'Uniform pressing' },
+  { media: <FiArrowRight />, title: 'Conveyor Belt', category: 'factory', desc: 'Automated transfer system' },
+  { media: <FiPackage />, title: 'Packaging Line', category: 'factory', desc: 'Hygienic sealed packaging' },
+  { media: <FiHeart />, title: 'Wedding Catering', category: 'catering', desc: 'Grand wedding feast' },
+  { media: <FiBriefcase />, title: 'Corporate Event', category: 'catering', desc: 'Office party catering' },
+  { media: <FiGift />, title: 'Festival Special', category: 'catering', desc: 'Festival celebrations' },
 ];
 
 const filterCategories = [
@@ -54,6 +54,13 @@ export default function Gallery() {
     });
   };
 
+  const renderMedia = (item) => {
+    if (item.isImage) {
+      return <img src={item.media} alt={item.title} className="gallery-img" />;
+    }
+    return item.media;
+  };
+
   return (
     <div className="gallery-page page-enter">
       <section className="page-hero">
@@ -79,7 +86,7 @@ export default function Gallery() {
           <div className="gallery-grid">
             {filtered.map((item, i) => (
               <div className="gallery-item" key={i} data-aos="fade-up" data-aos-delay={i * 50} onClick={() => openLightbox(i)}>
-                {item.emoji}
+                {renderMedia(item)}
                 <div className="overlay">
                   <h4>{item.title}</h4>
                   <p>{item.desc}</p>
@@ -95,7 +102,7 @@ export default function Gallery() {
           <button className="lightbox-close" onClick={closeLightbox}><FiX /></button>
           <button className="lightbox-nav prev" onClick={(e) => { e.stopPropagation(); navigate(-1); }}><FiChevronLeft /></button>
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            {filtered[lightbox]?.emoji}
+            {filtered[lightbox] && renderMedia(filtered[lightbox])}
           </div>
           <p className="lightbox-caption">{filtered[lightbox]?.title} — {filtered[lightbox]?.desc}</p>
           <button className="lightbox-nav next" onClick={(e) => { e.stopPropagation(); navigate(1); }}><FiChevronRight /></button>

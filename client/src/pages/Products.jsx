@@ -7,11 +7,11 @@ import './Products.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-const categoryEmojis = {
-  'chappathi': '🫓',
-  'poori': '🟡',
-  'parotta': '🥐',
-  'chola-poori': '✨'
+const categoryImages = {
+  'chappathi': '/chappathi-herobanner.jpg',
+  'poori': '/poori.png',
+  'parotta': '/parotta.png',
+  'chola-poori': '/chola-poori.png'
 };
 
 const categories = [
@@ -155,7 +155,7 @@ export default function Products() {
                 data-aos-delay={index * 100}
               >
                 <div className="product-card-img" onClick={() => openModal(product)} style={{ cursor: 'pointer' }}>
-                  {categoryEmojis[product.category] || '🍞'}
+                  <img src={categoryImages[product.category] || '/chappathi-herobanner.jpg'} alt={product.name} />
                   <span className="product-card-category">{product.category}</span>
                 </div>
                 <div className="product-card-content">
@@ -187,7 +187,7 @@ export default function Products() {
             <button className="modal-close" onClick={closeModal}><FiX /></button>
 
             <div className="modal-image">
-              {categoryEmojis[selectedProduct.category] || '🍞'}
+              <img src={categoryImages[selectedProduct.category] || '/chappathi-herobanner.jpg'} alt={selectedProduct.name} />
             </div>
 
             <div className="modal-body">
