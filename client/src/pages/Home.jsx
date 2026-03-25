@@ -83,14 +83,12 @@ export default function Home() {
                 Tirupur's trusted mini food factory producing premium chappathi, poori, parotta
                 & chola poori with state-of-the-art machinery. From our factory to your table.
               </p>
-              <div className="hero-actions">
-                <Link to="/products" className="btn btn-primary btn-lg">
-                  Order Now <FiArrowRight />
-                </Link>
-                <Link to="/factory" className="btn btn-secondary btn-lg">
-                  See Our Factory
-                </Link>
-              </div>
+              <div className="hero-actions" data-aos="fade-up" data-aos-delay="300">
+              <Link to="/products" className="btn btn-primary btn-lg">
+                View Products <FiArrowRight />
+              </Link>
+              <Link to="/contact" className="btn btn-outline btn-lg">Contact Us</Link>
+            </div>
             </div>
 
             <div className="hero-visual">
@@ -193,30 +191,25 @@ export default function Home() {
         <div className="container">
           <div className="section-header" data-aos="fade-up">
             <span className="badge"><FaBus style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Unique Delivery</span>
-            <h2>Fresh Deliveries <span className="text-gradient">via Bus Routes</span></h2>
-            <p>A unique delivery system that brings our products right to your nearest bus stop</p>
+            <h2>How We <span className="text-gradient">Dispatch to Your City</span></h2>
+            <p>Our unique bus-route logistics ensures fresh supply reaches you within hours, anywhere across our served routes.</p>
           </div>
 
-          <div className="delivery-steps">
-            <div className="delivery-step" data-aos="fade-up" data-aos-delay="0">
-              <div className="step-icon"><FiFileText /></div>
-              <h4>Place Order</h4>
-              <p>Order online or via WhatsApp</p>
+          <div className="dispatch-teaser-grid">
+            <div className="dispatch-card" data-aos="fade-up">
+              <div className="dispatch-icon">1</div>
+              <h4>Place Enquiry</h4>
+              <p>Confirm your bulk or retail needs via WhatsApp</p>
             </div>
-            <div className="delivery-step" data-aos="fade-up" data-aos-delay="150">
-              <div className="step-icon"><FiUserCheck /></div>
-              <h4>We Prepare</h4>
-              <p>Fresh made & packed daily</p>
+            <div className="dispatch-card" data-aos="fade-up" data-aos-delay="100">
+              <div className="dispatch-icon">2</div>
+              <h4>Rapid Dispatch</h4>
+              <p>Freshly packed and loaded onto early morning buses</p>
             </div>
-            <div className="delivery-step" data-aos="fade-up" data-aos-delay="300">
-              <div className="step-icon"><FaBus /></div>
-              <h4>Bus Dispatch</h4>
-              <p>Loaded onto your route's bus</p>
-            </div>
-            <div className="delivery-step" data-aos="fade-up" data-aos-delay="450">
-              <div className="step-icon"><FiGift /></div>
-              <h4>Collect Fresh!</h4>
-              <p>Pick up at your nearest stop</p>
+            <div className="dispatch-card" data-aos="fade-up" data-aos-delay="200">
+              <div className="dispatch-icon">3</div>
+              <h4>Fresh Arrival</h4>
+              <p>Collect at your stop — simple and cost-effective</p>
             </div>
           </div>
 
@@ -259,7 +252,7 @@ export default function Home() {
       <section className="cta-section" data-aos="fade-up">
         <div className="container">
           <h2>Ready to Order Fresh?</h2>
-          <p>Get factory-fresh chappathi, poori, parotta & chola poori delivered to your doorstep</p>
+          <p>Get factory-fresh chappathi, poori, parotta & chola poori for your business or event</p>
           <Link to="/products" className="btn btn-lg">
             Browse Products <FiArrowRight />
           </Link>

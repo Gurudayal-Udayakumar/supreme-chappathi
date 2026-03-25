@@ -41,20 +41,20 @@ export default function BusDelivery() {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* How We Dispatch */}
       <section className="section">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
-            <span className="badge">Simple Process</span>
-            <h2>How It <span className="text-gradient">Works</span></h2>
+            <span className="badge">Efficient Logistics</span>
+            <h2>How We <span className="text-gradient">Dispatch to Your City</span></h2>
           </div>
 
           <div className="how-it-works">
             {[
-              { icon: <FiFileText />, num: '1', title: 'Place Order', desc: 'Order online or via WhatsApp with your nearest bus stop' },
+              { icon: <FiFileText />, num: '1', title: 'Confirm Order', desc: 'Enquire via WhatsApp with your product requirement and nearest bus stop' },
               { icon: <FiUserCheck />, num: '2', title: 'We Prepare', desc: 'Fresh made, packed & sealed at our factory' },
-              { icon: <FaBus />, num: '3', title: 'Bus Dispatch', desc: 'Loaded onto the bus serving your route' },
-              { icon: <FiGift />, num: '4', title: 'Collect!', desc: 'Pick up fresh at your bus stop' },
+              { icon: <FaBus />, num: '3', title: 'Bus Dispatch', desc: 'Loaded onto the bus serving your route for rapid transit' },
+              { icon: <FiGift />, num: '4', title: 'Collect!', desc: 'Pick up fresh at your bus stop within hours' },
             ].map((step, i) => (
               <div className="how-step" key={i} data-aos="fade-up" data-aos-delay={i * 150}>
                 <div className="how-step-icon">{step.icon}</div>
@@ -67,7 +67,7 @@ export default function BusDelivery() {
 
           <div className="text-center">
             <Link to="/products" className="btn btn-primary" data-aos="fade-up">
-              Order Now <FiArrowRight />
+              View Products <FiArrowRight />
             </Link>
           </div>
         </div>

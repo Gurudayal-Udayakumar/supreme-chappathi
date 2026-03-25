@@ -22,7 +22,7 @@ export default function Footer() {
               <a href="#" aria-label="Instagram"><FaInstagram /></a>
               <a href="#" aria-label="Facebook"><FaFacebookF /></a>
               <a href="#" aria-label="YouTube"><FaYoutube /></a>
-              <a href="#" aria-label="WhatsApp"><FaWhatsapp /></a>
+              <a href="https://wa.me/918825982567" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><FaWhatsapp /></a>
             </div>
           </div>
 
@@ -45,7 +45,6 @@ export default function Footer() {
               <li><Link to="/about">About Us</Link></li>
               <li><Link to="/gallery">Gallery</Link></li>
               <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/cart">My Cart</Link></li>
             </ul>
           </div>
 
@@ -58,7 +57,7 @@ export default function Footer() {
             </div>
             <div className="footer-contact-item">
               <FiPhone className="icon" />
-              <span>+91 98765 43210</span>
+              <span>+91 88259 82567</span>
             </div>
             <div className="footer-contact-item">
               <FiMail className="icon" />

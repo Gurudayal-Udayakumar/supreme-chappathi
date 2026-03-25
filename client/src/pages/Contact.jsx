@@ -124,14 +124,14 @@ export default function Contact() {
                 <div className="contact-card-icon"><FiPhone /></div>
                 <div className="contact-card-info">
                   <h4>Call Us</h4>
-                  <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+                  <p><a href="tel:+918825982567">+91 88259 82567</a></p>
                 </div>
               </div>
               <div className="contact-card">
                 <div className="contact-card-icon"><FaWhatsapp /></div>
                 <div className="contact-card-info">
                   <h4>WhatsApp</h4>
-                  <p><a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">+91 98765 43210</a></p>
+                  <p><a href="https://wa.me/918825982567" target="_blank" rel="noopener noreferrer">+91 88259 82567</a></p>
                 </div>
               </div>
               <div className="contact-card">
@@ -179,7 +179,7 @@ export default function Contact() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 88259 82567"
                         required
                       />
                       {phoneError && <span className="field-error">{phoneError}</span>}

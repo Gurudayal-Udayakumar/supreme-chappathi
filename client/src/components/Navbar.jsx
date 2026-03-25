@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { FiSun, FiMoon, FiShoppingCart } from 'react-icons/fi';
+import { FiSun, FiMoon } from 'react-icons/fi';
 import { useTheme } from '../context/ThemeContext';
-import { useCart } from '../context/CartContext';
 import './Navbar.css';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
-  const { cartCount } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -42,11 +40,6 @@ export default function Navbar() {
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
             {theme === 'dark' ? <FiSun /> : <FiMoon />}
           </button>
-
-          <Link to="/cart" className="cart-btn" aria-label="Shopping cart">
-            <FiShoppingCart />
-            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-          </Link>
 
           <button
             className={`hamburger ${menuOpen ? 'open' : ''}`}

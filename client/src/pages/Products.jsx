@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { FiShoppingCart, FiX, FiCheck, FiList, FiBarChart2, FiUserCheck, FiClock, FiPackage } from 'react-icons/fi';
-import { useCart } from '../context/CartContext';
+import { FiX, FiCheck, FiList, FiBarChart2, FiUserCheck, FiClock, FiPackage, FiMessageCircle } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import './Products.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const WHATSAPP_NUMBER = '918825982567';
 
 const categoryImages = {
   'chappathi': '/chappathi-herobanner.jpg',
@@ -22,8 +23,6 @@ const categories = [
   { key: 'chola-poori', label: 'Chola Poori' },
 ];
 
-// Fallback product data when API is not available
-// Fallback product data when API is not available
 const fallbackProducts = [
   {
     _id: '1', name: 'Classic Chappathi', slug: 'classic-chappathi', category: 'chappathi',
@@ -72,8 +71,7 @@ export default function Products() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedPackSize, setSelectedPackSize] = useState(null);
-  const [addedToCart, setAddedToCart] = useState(false);
-  const { addToCart } = useCart();
+  const [enquired, setEnquired] = useState(false);
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
@@ -98,16 +96,25 @@ export default function Products() {
     ? products
     : products.filter(p => p.category === activeCategory);
 
-  const handleAddToCart = (product, packSize) => {
-    addToCart(product, packSize);
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 1500);
+  const handleEnquiry = (product, packSize = null, isBulk = false) => {
+    let message = `Hi Supreme Chappathi, I'm interested in the ${product.name}.`;
+    if (packSize) {
+      message += ` I'm specifically looking for the ${packSize.size} retail pack.`;
+    }
+    if (isBulk) {
+      message += ` I'm interested in bulk/wholesale pricing for my business. Please provide a quote.`;
+    }
+    
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+    setEnquired(true);
+    setTimeout(() => setEnquired(false), 2000);
   };
 
   const openModal = (product) => {
     setSelectedProduct(product);
     setSelectedPackSize(product.packSizes?.[0] || null);
-    setAddedToCart(false);
+    setEnquired(false);
     document.body.style.overflow = 'hidden';
   };
 
@@ -119,7 +126,6 @@ export default function Products() {
 
   return (
     <div className="products-page page-enter">
-      {/* Hero */}
       <section className="page-hero">
         <div className="container">
           <span className="badge">Fresh From Our Factory</span>
@@ -131,7 +137,6 @@ export default function Products() {
         </div>
       </section>
 
-      {/* Products Section */}
       <section className="section">
         <div className="container">
           <div className="category-filters" data-aos="fade-up">
@@ -150,7 +155,7 @@ export default function Products() {
             {filteredProducts.map((product, index) => (
               <div
                 key={product._id}
-                className="product-card"
+                className={`product-card ${product.category}`}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
               >
@@ -164,13 +169,13 @@ export default function Products() {
                   <p className="description">{product.description}</p>
                   <div className="product-card-footer">
                     <div className="price">
-                      ₹{product.packSizes?.[0]?.price} <small>/ {product.packSizes?.[0]?.size}</small>
+                      Retail: ₹{product.packSizes?.[0]?.price} <small>/ {product.packSizes?.[0]?.size}</small>
                     </div>
                     <button
                       className="add-cart-btn"
                       onClick={() => openModal(product)}
                     >
-                      <FiShoppingCart /> View
+                      <FiMessageCircle /> Details
                     </button>
                   </div>
                 </div>
@@ -180,7 +185,6 @@ export default function Products() {
         </div>
       </section>
 
-      {/* Product Detail Modal */}
       {selectedProduct && (
         <div className="product-modal-overlay" onClick={closeModal}>
           <div className="product-modal" onClick={e => e.stopPropagation()}>
@@ -230,7 +234,7 @@ export default function Products() {
               </p>
 
               <div className="pack-sizes">
-                <h4><FiPackage style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Select Pack Size</h4>
+                <h4><FiPackage style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Retail Packs & Pricing</h4>
                 <div className="pack-size-options">
                   {selectedProduct.packSizes?.map((ps, i) => (
                     <button
@@ -244,15 +248,25 @@ export default function Products() {
                 </div>
               </div>
 
-              <div className="modal-actions">
+              <div className="modal-actions" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
                 <button
                   className="btn btn-primary btn-lg"
-                  onClick={() => selectedPackSize && handleAddToCart(selectedProduct, selectedPackSize)}
-                  disabled={!selectedPackSize}
+                  onClick={() => handleEnquiry(selectedProduct, selectedPackSize)}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
                 >
-                  {addedToCart ? <><FiCheck /> Added!</> : <><FiShoppingCart /> Add to Cart — ₹{selectedPackSize?.price}</>}
+                  <FaWhatsapp /> Enquire via WhatsApp
+                </button>
+                
+                <button
+                  className="btn btn-outline btn-lg"
+                  onClick={() => handleEnquiry(selectedProduct, null, true)}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', width: '100%', border: '1px solid var(--border-color)' }}
+                >
+                  Request Bulk / Catering Quote
                 </button>
               </div>
+              
+              {enquired && <p style={{ color: 'var(--saffron)', fontSize: '0.85rem', textAlign: 'center', marginTop: 'var(--space-md)' }}>Opening WhatsApp...</p>}
             </div>
           </div>
         </div>
@@ -260,3 +274,4 @@ export default function Products() {
     </div>
   );
 }
+
