@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiLayers, FiRefreshCw, FiCircle, FiZap, FiWind, FiPackage, FiCheckCircle, FiSettings, FiDroplet, FiFeather, FiSearch } from 'react-icons/fi';
 import './Factory.css';
 
 const productionSteps = [
@@ -10,65 +10,65 @@ const productionSteps = [
     number: 1,
     title: 'Raw Material Selection',
     machine: 'Quality Control',
-    emoji: '🌾',
+    emoji: <FiLayers />,
     description: 'We source only the finest wheat flour, semolina, and cooking oil from trusted suppliers. Every batch is tested for quality, freshness, and consistency before entering our production line.'
   },
   {
     number: 2,
     title: 'Automated Dough Kneading',
     machine: 'Dough Kneader Machine',
-    emoji: '🔄',
+    emoji: <FiRefreshCw />,
     description: 'Our industrial dough kneader mixes precise proportions of flour, water, salt, and oil to create perfectly consistent dough every time. The machine handles large batches while maintaining the ideal texture and softness.'
   },
   {
     number: 3,
     title: 'Precision Ball Cutting',
     machine: 'Ball Cutter Machine',
-    emoji: '⚪',
+    emoji: <FiCircle />,
     description: 'The kneaded dough moves to our ball cutter, which portions each piece to exact weight specifications. Every dough ball is uniform — ensuring consistent size and weight in every chappathi, poori, or parotta.'
   },
   {
     number: 4,
     title: 'Machine Pressing',
     machine: 'Pressing Machine',
-    emoji: '🔨',
+    emoji: <FiZap />,
     description: 'Each dough ball is fed into our pressing machine, which flattens and shapes them to perfect circular form and uniform thickness. For parotta, a special folding mechanism creates those signature flaky layers.'
   },
   {
     number: 5,
     title: 'Conveyor Belt Transfer',
     machine: 'Conveyor Belt System',
-    emoji: '➡️',
+    emoji: <FiArrowRight />,
     description: 'A sanitized conveyor belt system smoothly transfers the pressed products through our flour dusting station and into the packaging area. This automated flow ensures zero manual handling for maximum hygiene.'
   },
   {
     number: 6,
     title: 'Flour Dust Application',
     machine: 'Flour Dust Conveyor',
-    emoji: '💨',
+    emoji: <FiWind />,
     description: 'A light dusting of flour is applied to prevent sticking during packaging and storage. Our flour dust conveyor ensures even distribution on every piece, maintaining freshness and easy separation.'
   },
   {
     number: 7,
     title: 'Hygienic Packaging',
     machine: 'Packaging Machine',
-    emoji: '📦',
+    emoji: <FiPackage />,
     description: 'Products are automatically counted, stacked, and placed into food-grade packaging. Our packaging machine ensures each pack contains the exact number of pieces with proper arrangement for easy handling.'
   },
   {
     number: 8,
     title: 'Sealed & Ready',
     machine: 'Sealing Machine',
-    emoji: '✅',
+    emoji: <FiCheckCircle />,
     description: 'The final step — our sealing machine heat-seals every package to lock in freshness. Each sealed pack is dated, labeled, and ready for distribution to retail shops or direct customer orders.'
   }
 ];
 
 const qualityPoints = [
-  { icon: '🧼', title: 'Hygiene First', desc: 'FSSAI standards, sanitized equipment, hairnets & gloves' },
-  { icon: '⚙️', title: 'Machine Precision', desc: 'Consistent quality with automated processes' },
-  { icon: '🌿', title: 'Fresh Ingredients', desc: 'Sourced daily from trusted local suppliers' },
-  { icon: '🔬', title: 'Quality Tested', desc: 'Every batch inspected before packaging' },
+  { icon: <FiDroplet />, title: 'Hygiene First', desc: 'FSSAI standards, sanitized equipment, hairnets & gloves' },
+  { icon: <FiSettings />, title: 'Machine Precision', desc: 'Consistent quality with automated processes' },
+  { icon: <FiFeather />, title: 'Fresh Ingredients', desc: 'Sourced daily from trusted local suppliers' },
+  { icon: <FiSearch />, title: 'Quality Tested', desc: 'Every batch inspected before packaging' },
 ];
 
 export default function Factory() {
@@ -81,7 +81,7 @@ export default function Factory() {
       {/* Hero */}
       <section className="page-hero">
         <div className="container">
-          <span className="badge">🏭 Our Factory</span>
+          <span className="badge"><FiSettings style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Our Factory</span>
           <h1>Where <span className="text-gradient">Machines Meet</span> Tradition</h1>
           <p style={{ margin: '0 auto', maxWidth: '600px' }}>
             Take a virtual tour of our state-of-the-art mini food factory in Tirupur.
@@ -102,7 +102,7 @@ export default function Factory() {
           {productionSteps.map((step, index) => (
             <div className="production-step" key={step.number}>
               <div className="step-content" data-aos={index % 2 === 0 ? 'fade-right' : 'fade-left'} data-aos-delay="100">
-                <span className="machine-name">⚙️ {step.machine}</span>
+                <span className="machine-name"><FiSettings style={{ marginRight: '0.3rem', verticalAlign: 'middle' }} /> {step.machine}</span>
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
               </div>

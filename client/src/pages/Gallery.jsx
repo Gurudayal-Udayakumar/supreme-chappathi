@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiX, FiChevronLeft, FiChevronRight, FiCamera, FiDisc, FiSun, FiLayers, FiStar, FiRefreshCw, FiCircle, FiZap, FiArrowRight, FiPackage, FiHeart, FiBriefcase, FiGift } from 'react-icons/fi';
+import { FaBus } from 'react-icons/fa';
 import './Gallery.css';
 
 const galleryItems = [
-  { emoji: '🫓', title: 'Classic Chappathi', category: 'products', desc: 'Soft, fresh chappathi stacks' },
-  { emoji: '🟡', title: 'Golden Poori', category: 'products', desc: 'Perfectly round pooris' },
-  { emoji: '🥐', title: 'Flaky Parotta', category: 'products', desc: 'Layered parotta perfection' },
-  { emoji: '✨', title: 'Chola Poori', category: 'products', desc: 'Spiced festival favourite' },
-  { emoji: '🔄', title: 'Dough Kneader', category: 'factory', desc: 'Industrial dough mixing' },
-  { emoji: '⚪', title: 'Ball Cutter', category: 'factory', desc: 'Precision portioning' },
-  { emoji: '🔨', title: 'Pressing Machine', category: 'factory', desc: 'Uniform pressing' },
-  { emoji: '➡️', title: 'Conveyor Belt', category: 'factory', desc: 'Automated transfer system' },
-  { emoji: '📦', title: 'Packaging Line', category: 'factory', desc: 'Hygienic sealed packaging' },
-  { emoji: '💍', title: 'Wedding Catering', category: 'catering', desc: 'Grand wedding feast' },
-  { emoji: '🏢', title: 'Corporate Event', category: 'catering', desc: 'Office party catering' },
-  { emoji: '🎉', title: 'Festival Special', category: 'catering', desc: 'Festival celebrations' },
+  { emoji: <FiDisc />, title: 'Classic Chappathi', category: 'products', desc: 'Soft, fresh chappathi stacks' },
+  { emoji: <FiSun />, title: 'Golden Poori', category: 'products', desc: 'Perfectly round pooris' },
+  { emoji: <FiLayers />, title: 'Flaky Parotta', category: 'products', desc: 'Layered parotta perfection' },
+  { emoji: <FiStar />, title: 'Chola Poori', category: 'products', desc: 'Spiced festival favourite' },
+  { emoji: <FiRefreshCw />, title: 'Dough Kneader', category: 'factory', desc: 'Industrial dough mixing' },
+  { emoji: <FiCircle />, title: 'Ball Cutter', category: 'factory', desc: 'Precision portioning' },
+  { emoji: <FiZap />, title: 'Pressing Machine', category: 'factory', desc: 'Uniform pressing' },
+  { emoji: <FiArrowRight />, title: 'Conveyor Belt', category: 'factory', desc: 'Automated transfer system' },
+  { emoji: <FiPackage />, title: 'Packaging Line', category: 'factory', desc: 'Hygienic sealed packaging' },
+  { emoji: <FiHeart />, title: 'Wedding Catering', category: 'catering', desc: 'Grand wedding feast' },
+  { emoji: <FiBriefcase />, title: 'Corporate Event', category: 'catering', desc: 'Office party catering' },
+  { emoji: <FiGift />, title: 'Festival Special', category: 'catering', desc: 'Festival celebrations' },
 ];
 
 const filterCategories = [
@@ -57,7 +58,7 @@ export default function Gallery() {
     <div className="gallery-page page-enter">
       <section className="page-hero">
         <div className="container">
-          <span className="badge">📸 Gallery</span>
+          <span className="badge"><FiCamera style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Gallery</span>
           <h1>Our <span className="text-gradient">Gallery</span></h1>
           <p style={{ margin: '0 auto', maxWidth: '600px' }}>
             A visual journey through our products, factory, and catering events

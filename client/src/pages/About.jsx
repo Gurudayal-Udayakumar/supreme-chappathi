@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { FiAward, FiDroplet, FiFeather, FiUsers, FiZap, FiHeart, FiUserCheck } from 'react-icons/fi';
 import './About.css';
 
 export default function About() {
@@ -22,7 +23,7 @@ export default function About() {
       <section className="section">
         <div className="container">
           <div className="story-section">
-            <div className="story-image" data-aos="fade-right">👩‍🍳</div>
+            <div className="story-image" data-aos="fade-right"><FiUserCheck /></div>
             <div className="story-text" data-aos="fade-left">
               <span className="badge">Our Story</span>
               <h2>Started with a <span className="text-gradient">Passion for Quality</span></h2>
@@ -43,12 +44,12 @@ export default function About() {
           </div>
           <div className="values-grid">
             {[
-              { icon: '🌟', title: 'Quality First', desc: 'Every product meets our strict quality standards — no compromises, no shortcuts.' },
-              { icon: '🧼', title: 'Hygiene', desc: 'Factory-level cleanliness with FSSAI compliance and sanitized machinery.' },
-              { icon: '🌿', title: 'Freshness', desc: 'Made fresh daily and delivered within hours of production.' },
-              { icon: '🤝', title: 'Reliability', desc: 'Our retail partners trust us for consistent daily supply, rain or shine.' },
-              { icon: '💡', title: 'Innovation', desc: 'From bus delivery to automated production — we innovate constantly.' },
-              { icon: '❤️', title: 'Community', desc: 'Proud to serve Tirupur and surrounding communities with affordable nutrition.' },
+              { icon: <FiAward />, title: 'Quality First', desc: 'Every product meets our strict quality standards — no compromises, no shortcuts.' },
+              { icon: <FiDroplet />, title: 'Hygiene', desc: 'Factory-level cleanliness with FSSAI compliance and sanitized machinery.' },
+              { icon: <FiFeather />, title: 'Freshness', desc: 'Made fresh daily and delivered within hours of production.' },
+              { icon: <FiUsers />, title: 'Reliability', desc: 'Our retail partners trust us for consistent daily supply, rain or shine.' },
+              { icon: <FiZap />, title: 'Innovation', desc: 'From bus delivery to automated production — we innovate constantly.' },
+              { icon: <FiHeart />, title: 'Community', desc: 'Proud to serve Tirupur and surrounding communities with affordable nutrition.' },
             ].map((v, i) => (
               <div className="value-card" key={i} data-aos="fade-up" data-aos-delay={i * 80}>
                 <div className="value-icon">{v.icon}</div>
@@ -65,7 +66,7 @@ export default function About() {
         <div className="container">
           <div className="founder-section" data-aos="fade-up">
             <div>
-              <div className="founder-image">👩‍🍳</div>
+              <div className="founder-image"><FiUserCheck /></div>
             </div>
             <div className="founder-info">
               <span className="badge">Founder</span>

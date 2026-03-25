@@ -391,6 +391,13 @@
   color: var(--saffron);
   font-size: 1rem;
   margin-bottom: var(--space-md);
+  display: flex;
+  gap: 0.15rem;
+}
+
+.testimonial-card .stars svg {
+  fill: var(--saffron);
+  stroke: var(--saffron);
 }
 
 .testimonial-card .quote {

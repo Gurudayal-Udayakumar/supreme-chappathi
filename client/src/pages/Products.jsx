@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { FiShoppingCart, FiX, FiCheck } from 'react-icons/fi';
+import { FiShoppingCart, FiX, FiCheck, FiList, FiBarChart2, FiUserCheck, FiClock, FiPackage } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
 import './Products.css';
 
@@ -197,7 +197,7 @@ export default function Products() {
 
               <div className="modal-info-grid">
                 <div className="modal-info-section">
-                  <h4>🧾 Ingredients</h4>
+                  <h4><FiList style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Ingredients</h4>
                   <ul>
                     {selectedProduct.ingredients?.map((ing, i) => (
                       <li key={i}>{ing}</li>
@@ -205,7 +205,7 @@ export default function Products() {
                   </ul>
                 </div>
                 <div className="modal-info-section">
-                  <h4>📊 Nutrition</h4>
+                  <h4><FiBarChart2 style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Nutrition</h4>
                   <ul>
                     {selectedProduct.nutrition && Object.entries(selectedProduct.nutrition).map(([key, val]) => (
                       <li key={key}>{key}: {val}</li>
@@ -216,7 +216,7 @@ export default function Products() {
 
               {selectedProduct.cookingInstructions && (
                 <div className="modal-info-section" style={{ marginBottom: 'var(--space-xl)' }}>
-                  <h4>👩‍🍳 Cooking Instructions</h4>
+                  <h4><FiUserCheck style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Cooking Instructions</h4>
                   <ul>
                     {selectedProduct.cookingInstructions.map((step, i) => (
                       <li key={i}>{step}</li>
@@ -226,11 +226,11 @@ export default function Products() {
               )}
 
               <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: 'var(--space-lg)' }}>
-                🕐 Shelf Life: {selectedProduct.shelfLife}
+                <FiClock style={{ marginRight: '0.3rem', verticalAlign: 'middle' }} /> Shelf Life: {selectedProduct.shelfLife}
               </p>
 
               <div className="pack-sizes">
-                <h4>📦 Select Pack Size</h4>
+                <h4><FiPackage style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Select Pack Size</h4>
                 <div className="pack-size-options">
                   {selectedProduct.packSizes?.map((ps, i) => (
                     <button

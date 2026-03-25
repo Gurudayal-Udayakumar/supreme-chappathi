@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { FiTruck, FiShield, FiClock, FiArrowRight } from 'react-icons/fi';
+import { FiTruck, FiShield, FiClock, FiArrowRight, FiSettings, FiFileText, FiUserCheck, FiGift, FiStar } from 'react-icons/fi';
 import { FaBus } from 'react-icons/fa';
 import './Home.css';
 
@@ -108,7 +108,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="hero-float-card card-1">
-                <div className="card-icon">🏭</div>
+                <div className="card-icon"><FiSettings /></div>
                 <div className="card-info">
                   <span>Production</span>
                   <strong>5000+ Daily</strong>
@@ -184,7 +184,7 @@ export default function Home() {
             </div>
             <div className="factory-image-block" data-aos="fade-left">
               <div className="factory-image-placeholder">
-                🏭
+                <FiSettings style={{ fontSize: '3rem' }} />
                 <span>Factory Tour Coming Soon</span>
               </div>
             </div>
@@ -196,19 +196,19 @@ export default function Home() {
       <section className="section bus-delivery-preview">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
-            <span className="badge">🚌 Unique Delivery</span>
+            <span className="badge"><FaBus style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Unique Delivery</span>
             <h2>Fresh Deliveries <span className="text-gradient">via Bus Routes</span></h2>
             <p>A unique delivery system that brings our products right to your nearest bus stop</p>
           </div>
 
           <div className="delivery-steps">
             <div className="delivery-step" data-aos="fade-up" data-aos-delay="0">
-              <div className="step-icon">📝</div>
+              <div className="step-icon"><FiFileText /></div>
               <h4>Place Order</h4>
               <p>Order online or via WhatsApp</p>
             </div>
             <div className="delivery-step" data-aos="fade-up" data-aos-delay="150">
-              <div className="step-icon">👨‍🍳</div>
+              <div className="step-icon"><FiUserCheck /></div>
               <h4>We Prepare</h4>
               <p>Fresh made & packed daily</p>
             </div>
@@ -218,7 +218,7 @@ export default function Home() {
               <p>Loaded onto your route's bus</p>
             </div>
             <div className="delivery-step" data-aos="fade-up" data-aos-delay="450">
-              <div className="step-icon">🎉</div>
+              <div className="step-icon"><FiGift /></div>
               <h4>Collect Fresh!</h4>
               <p>Pick up at your nearest stop</p>
             </div>
@@ -244,7 +244,7 @@ export default function Home() {
           <div className="testimonials-grid">
             {testimonials.map((t, i) => (
               <div className="testimonial-card" key={i} data-aos="fade-up" data-aos-delay={i * 100}>
-                <div className="stars">★★★★★</div>
+                <div className="stars">{[...Array(5)].map((_, i) => <FiStar key={i} />)}</div>
                 <p className="quote">"{t.quote}"</p>
                 <div className="testimonial-author">
                   <div className="avatar">{t.initials}</div>

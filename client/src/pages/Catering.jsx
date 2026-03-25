@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { FiCheck, FiSend } from 'react-icons/fi';
+import { FiCheck, FiSend, FiHeart, FiBriefcase, FiUsers, FiCoffee, FiCheckCircle } from 'react-icons/fi';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import './Catering.css';
 
@@ -10,21 +10,21 @@ const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
 
 const packages = [
   {
-    icon: '💍',
+    icon: <FiHeart />,
     title: 'Wedding Package',
     desc: 'Grand celebrations deserve grand feasts',
     features: ['Custom menu selection', 'Bulk quantities (500+)', 'On-time delivery guaranteed', 'Variety packs available', 'Dedicated coordinator'],
     featured: false
   },
   {
-    icon: '🏢',
+    icon: <FiBriefcase />,
     title: 'Corporate Events',
     desc: 'Impress your team with fresh delights',
     features: ['Office parties & meetings', 'Regular supply contracts', 'Custom branding options', 'Weekly/monthly plans', 'Flexible quantities'],
     featured: true
   },
   {
-    icon: '👨‍👩‍👧‍👦',
+    icon: <FiUsers />,
     title: 'Family Celebrations',
     desc: 'Birthdays, festivals & family gatherings',
     features: ['Minimum 50 pieces', 'Festival special items', 'Same-day delivery', 'Combo packs available', 'Affordable pricing'],
@@ -71,7 +71,7 @@ export default function Catering() {
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({
               access_key: WEB3FORMS_KEY,
-              subject: `🍽️ Catering Enquiry: ${formData.eventType} - ${formData.name}`,
+              subject: `Catering Enquiry: ${formData.eventType} - ${formData.name}`,
               from_name: 'Supreme Chappathi Website',
               name: formData.name,
               email: formData.email || 'Not provided',
@@ -108,7 +108,7 @@ export default function Catering() {
     <div className="catering-page page-enter">
       <section className="page-hero">
         <div className="container">
-          <span className="badge">🍽️ Catering Services</span>
+          <span className="badge"><FiCoffee style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Catering Services</span>
           <h1>Catering for <span className="text-gradient">Every Occasion</span></h1>
           <p style={{ margin: '0 auto', maxWidth: '600px' }}>
             From intimate family gatherings to grand weddings — we deliver fresh, delicious
@@ -158,7 +158,7 @@ export default function Catering() {
           <div className="enquiry-form-wrapper" data-aos="fade-up">
             {submitted ? (
               <div className="form-success">
-                <div className="success-icon">✅</div>
+                <div className="success-icon"><FiCheckCircle /></div>
                 <h3>Enquiry Submitted!</h3>
                 <p>Thank you! We will contact you within 24 hours with a custom quote.</p>
               </div>

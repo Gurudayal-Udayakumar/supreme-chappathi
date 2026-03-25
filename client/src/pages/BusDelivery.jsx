@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { FiArrowRight, FiChevronDown } from 'react-icons/fi';
+import { FiArrowRight, FiChevronDown, FiFileText, FiUserCheck, FiGift, FiClock, FiDollarSign, FiFeather } from 'react-icons/fi';
 import { FaBus } from 'react-icons/fa';
 import './BusDelivery.css';
 
 const routes = [
-  { icon: '🚌', name: 'Tirupur - Coimbatore', areas: 'Avinashi, Peelamedu, Gandhipuram', timing: 'Daily 6:30 AM Bus' },
-  { icon: '🚌', name: 'Tirupur - Erode', areas: 'Dharapuram, Kangeyam, Perundurai', timing: 'Daily 7:00 AM Bus' },
-  { icon: '🚌', name: 'Tirupur - Karur', areas: 'Vellakoil, Palani Road areas', timing: 'Daily 6:45 AM Bus' },
-  { icon: '🚌', name: 'Tirupur - Palladam', areas: 'Mangalam, Palladam town', timing: 'Daily 6:30 AM Bus' },
-  { icon: '🚌', name: 'Tirupur - Udumalpet', areas: 'Pollachi Road, Pongalur', timing: 'Daily 7:15 AM Bus' },
-  { icon: '🚌', name: 'Tirupur - Salem', areas: 'Namakkal, Rasipuram', timing: 'Tue, Thu, Sat — 6:00 AM' },
+  { icon: <FaBus />, name: 'Tirupur - Coimbatore', areas: 'Avinashi, Peelamedu, Gandhipuram', timing: 'Daily 6:30 AM Bus' },
+  { icon: <FaBus />, name: 'Tirupur - Erode', areas: 'Dharapuram, Kangeyam, Perundurai', timing: 'Daily 7:00 AM Bus' },
+  { icon: <FaBus />, name: 'Tirupur - Karur', areas: 'Vellakoil, Palani Road areas', timing: 'Daily 6:45 AM Bus' },
+  { icon: <FaBus />, name: 'Tirupur - Palladam', areas: 'Mangalam, Palladam town', timing: 'Daily 6:30 AM Bus' },
+  { icon: <FaBus />, name: 'Tirupur - Udumalpet', areas: 'Pollachi Road, Pongalur', timing: 'Daily 7:15 AM Bus' },
+  { icon: <FaBus />, name: 'Tirupur - Salem', areas: 'Namakkal, Rasipuram', timing: 'Tue, Thu, Sat — 6:00 AM' },
 ];
 
 const faqs = [
@@ -32,7 +32,7 @@ export default function BusDelivery() {
     <div className="bus-page page-enter">
       <section className="page-hero">
         <div className="container">
-          <span className="badge">🚌 Bus Delivery</span>
+          <span className="badge"><FaBus style={{ marginRight: '0.4rem', verticalAlign: 'middle' }} /> Bus Delivery</span>
           <h1>Fresh Deliveries <span className="text-gradient">Via Bus Routes</span></h1>
           <p style={{ margin: '0 auto', maxWidth: '600px' }}>
             A unique, affordable delivery system. We load your orders onto local buses
@@ -51,10 +51,10 @@ export default function BusDelivery() {
 
           <div className="how-it-works">
             {[
-              { icon: '📱', num: '1', title: 'Place Order', desc: 'Order online or via WhatsApp with your nearest bus stop' },
-              { icon: '👨‍🍳', num: '2', title: 'We Prepare', desc: 'Fresh made, packed & sealed at our factory' },
+              { icon: <FiFileText />, num: '1', title: 'Place Order', desc: 'Order online or via WhatsApp with your nearest bus stop' },
+              { icon: <FiUserCheck />, num: '2', title: 'We Prepare', desc: 'Fresh made, packed & sealed at our factory' },
               { icon: <FaBus />, num: '3', title: 'Bus Dispatch', desc: 'Loaded onto the bus serving your route' },
-              { icon: '🎉', num: '4', title: 'Collect!', desc: 'Pick up fresh at your bus stop' },
+              { icon: <FiGift />, num: '4', title: 'Collect!', desc: 'Pick up fresh at your bus stop' },
             ].map((step, i) => (
               <div className="how-step" key={i} data-aos="fade-up" data-aos-delay={i * 150}>
                 <div className="how-step-icon">{step.icon}</div>
@@ -89,7 +89,7 @@ export default function BusDelivery() {
                 <div className="route-info">
                   <h4>{route.name}</h4>
                   <p>{route.areas}</p>
-                  <p className="timing">🕐 {route.timing}</p>
+                  <p className="timing"><FiClock style={{ marginRight: '0.3rem', verticalAlign: 'middle' }} /> {route.timing}</p>
                 </div>
               </div>
             ))}
@@ -107,9 +107,9 @@ export default function BusDelivery() {
 
           <div className="benefits-grid">
             {[
-              { icon: '💰', title: 'Cost Effective', desc: 'Bus transport is much cheaper than dedicated delivery vehicles, savings passed to you' },
-              { icon: '🌿', title: 'Eco Friendly', desc: 'Utilizing existing bus infrastructure means lower carbon footprint for deliveries' },
-              { icon: '⏰', title: 'Reliable Timing', desc: 'Buses run on fixed schedules — predictable delivery times you can count on' },
+              { icon: <FiDollarSign />, title: 'Cost Effective', desc: 'Bus transport is much cheaper than dedicated delivery vehicles, savings passed to you' },
+              { icon: <FiFeather />, title: 'Eco Friendly', desc: 'Utilizing existing bus infrastructure means lower carbon footprint for deliveries' },
+              { icon: <FiClock />, title: 'Reliable Timing', desc: 'Buses run on fixed schedules — predictable delivery times you can count on' },
             ].map((b, i) => (
               <div className="benefit-card" key={i} data-aos="fade-up" data-aos-delay={i * 100}>
                 <div className="benefit-icon">{b.icon}</div>
